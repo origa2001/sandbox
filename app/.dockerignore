@@ -1,0 +1,12 @@
+# Do NOT include local dependencies
+node_modules
+npm-debug.log
+*.log
+
+# Do NOT include git files or repo metadata
+.git
+.gitignore
+
+# Do NOT bake env files into images
+.env
+.env.*

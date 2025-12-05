@@ -1,0 +1,32 @@
+name: CI - Build Node App & Docker Image
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Use Node.js LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        working-directory: ./app
+        run: npm install
+
+      - name: Run tests
+        working-directory: ./app
+        run: npm test
+
+      - name: Build Docker image
+        working-directory: ./app
+        run: docker build -t devops-sandbox-app .
