@@ -30,3 +30,19 @@ jobs:
       - name: Build Docker image
         working-directory: ./app
         run: docker build -t devops-sandbox-app .
+        
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build Docker image
+        working-directory: ./app
+        run: |
+          docker build -t origa2001/devops-sandbox-app:latest .
+
+      - name: Push Docker image
+        run: |
+          docker push origa2001/devops-sandbox-app:latest
+  
